@@ -1,8 +1,8 @@
 {{ partial "html-head.html" . }}
 <div class="content-container">
   <div class="content-area">
+                <img src="{{ .Params.photo }}" alt="{{ .Params.name}}" width=200px class="clarityAuthorProfile"/>
                 <h1>{{ .Params.name }}</h1>
-                <img src="{{ .Params.photo }}" alt="{{ .Params.name}}" class="clarityAuthorProfile"/>
                 {{ .Content }}
                 {{ with .Params.twitter }}
                   <p>
@@ -12,7 +12,7 @@
                   </p>
                 {{ end }}
                 
-                <h2>Articles</h2>
+                <h3>All posts by {{ .Params.name }}</h3>
                 {{/*  <ul>
                 {{ range .Data.Pages }}
                     <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
