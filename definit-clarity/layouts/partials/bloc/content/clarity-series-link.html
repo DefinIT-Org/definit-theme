@@ -6,7 +6,7 @@
               <div class="alert-icon-wrapper">
                   <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
               </div>
-              <span class="alert-text">This post is part of the <a href="{{.Site.BaseURL}}series/{{$name | urlize}}">{{$name}}</a> series.</span>
+              <span class="alert-text">This post is part of the <a href="{{.Site.BaseURL}}series/{{$name | urlize}}/">{{$name}}</a> series.</span>
               <div class="alert-actions">
                 <ol>
                 {{ range $ind,$art := ($.Site.Pages.ByDate).Reverse }}
