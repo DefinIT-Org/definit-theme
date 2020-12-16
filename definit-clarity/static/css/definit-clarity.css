@@ -406,3 +406,8 @@ blockquote:before {
 blockquote p {
     display: inline;
 }
+
+code {
+    color: white !important;
+    font-weight: bold;
+}
