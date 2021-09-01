@@ -5,7 +5,7 @@
           <div class="alert-icon-wrapper">
               <clr-icon class="alert-icon" shape="warning-standard"></clr-icon>
           </div>
-          <span class="alert-text">This article is now {{ div (sub now.Unix .Date.Unix) 31557600}} years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
+          <span class="alert-text">This article is now {{ math.Round (div (sub now.Unix .Date.Unix) 31557600.0) }} years old! It is highly likely that this information is out of date and the author will have completely forgotten about it. Please take care when following any guidance to ensure you have up-to-date recommendations.</span>
       </div>
   </div>
 </div>
