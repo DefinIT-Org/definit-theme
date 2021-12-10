@@ -31,7 +31,7 @@
   <nav class="header-nav">
     {{ $currentNode := . }}
     {{ range .Site.Menus.main }}
-        <a class="nav-link {{if $currentNode.IsMenuCurrent "main" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" {{ if and ( isset . "Name" ) ( ne .Name "" ) }} title="{{ .Name }}"{{ end }}>
+        <a class="nav-link {{if $currentNode.IsMenuCurrent "main" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">
           {{ .Pre }}
           {{ .Name }}
         </a>
@@ -46,16 +46,4 @@
     </form>
   </div>
 </header>
-<nav class="subnav">
-  <ul class="nav">
-    {{ $currentPage := . }}
-    {{ range .Site.Menus.main }}
-    <li class="nav-item">
-        <a class="nav-link {{if $currentPage.IsMenuCurrent "main" . }}active{{end}}" href="{{ .URL | absLangURL }}" {{ if and ( isset . "Name" ) ( ne .Name "" ) }} title="{{ .Name }}"{{ end }}>
-          {{ .Pre }}
-          {{ .Name }}
-        </a>
-    </li>
-    {{ end }}
-  </ul>
-</nav>
+
