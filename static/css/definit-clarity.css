@@ -330,7 +330,7 @@ li.pagination__item {
     display: inline-block;
 }
 
-table {
+/* table {
     border-collapse: separate;
     border: 1px solid #485764;
     border-radius: 0.125rem;
@@ -361,7 +361,7 @@ th {
     vertical-align: bottom;
     border-bottom: 1px solid #485764;
     border-top: 0 none;
-}
+} */
 
 a.clr-tags {
     color: #666666;
@@ -407,7 +407,23 @@ blockquote p {
     display: inline;
 }
 
-code {
+/* code {
     color: white !important;
     font-weight: bold;
+} */
+
+.content-area {
+    padding-top: 3rem !important;
+    padding-left: 5rem !important;
+}
+
+
+/* pre code {
+    white-space: pre-wrap !important;
+    word-break: break-word;
+} */
+
+.content-area h1 {
+    margin-bottom: 1.7rem;
+    margin-top: 1rem !important;
 }
