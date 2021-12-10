@@ -413,8 +413,7 @@ blockquote p {
 } */
 
 .content-area {
-    padding-top: 3rem !important;
-    padding-left: 5rem !important;
+    padding: 3rem 5rem !important;
 }
 
 
