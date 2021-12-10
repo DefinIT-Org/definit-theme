@@ -10,9 +10,7 @@
       {{ partial "modules/disqus.html" . }}
       {{ partial "bloc/content/clarity-prev-next.html" . }}
   </div><!-- /.content-area -->
-  <div class="content-area">
   {{ if .Site.Params.clarityNavSidebar }}
-  </div>
   {{ partial "bloc/content/clarity-navigation.html" . }}
   {{ end }}
 </div><!-- /.content-container -->
