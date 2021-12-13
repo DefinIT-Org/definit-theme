@@ -417,10 +417,9 @@ blockquote p {
 }
 
 
-/* pre code {
-    white-space: pre-wrap !important;
-    word-break: break-word;
-} */
+p code {
+    color: #a90d91;
+}
 
 .content-area h1 {
     margin-bottom: 1.7rem;
