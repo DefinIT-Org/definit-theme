@@ -1,7 +1,7 @@
 <nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
   <section class="sidenav-content">
     {{ $currentNode := . }}
-    {{ if .Site.Params.clarityNavSections }}
+    {{ if .Site.Params.clarity.Nav.Sections }}
     <section class="nav-group collapsible">
       <input id="Sections" type="checkbox">
       <label for="Sections">Sections</label>
@@ -16,7 +16,7 @@
       </ul>
     </section>
     {{ end }}
-    {{ if .Site.Params.clarityNavCategories }}
+    {{ if .Site.Params.clarity.Nav.Categories }}
     <section class="nav-group collapsible">
       <input id="Categories" type="checkbox">
       <label for="Categories">Categories</label>
@@ -27,7 +27,7 @@
       </ul>
     </section>
     {{ end }}
-    {{ if .Site.Params.clarityNavTags }}
+    {{ if .Site.Params.clarity.Nav.Tags }}
     <section class="nav-group collapsible">
       <input id="Tags" type="checkbox">
       <label for="Tags">Tags (Top 10)</label>
