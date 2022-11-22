@@ -1,5 +1,8 @@
 <div class="content-container">
     <div class="content-area col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      {{- if .Site.Home.Content -}}
+        {{- .Site.Home.Content -}}
+      {{- else -}}
       <div class="clr-row">
         {{ $paginator := .Paginate (where .Site.Pages "Type" "post") }}
         {{ range $paginator.Pages }}
@@ -7,6 +10,7 @@
         {{ end }}
       </div><!--./card-columns-->
       {{ partial "bloc/content/pagination.html" . }}
+        {{- end -}}
     </div><!-- /.content-area -->
     {{ if .Site.Params.clarityNavSidebar }}
     {{ partial "bloc/content/clarity-navigation.html" . }}

@@ -1,14 +1,16 @@
-<!-- <section class="nav-group collapsible">
-    <input id="LatestPosts" type="checkbox">
-    <label for="LatestPosts">{{ i18n "latestposts" }}</label>
-    <ul class="nav-list">
-      {{ range first 5 (where (where .Site.Pages "Type" "post") "IsPage" true) }}
-      <li><a class="nav-link" href="{{ .Permalink }}">{{ .Title }}</a></li>
-      {{ end }}
-    </ul>
-  </section> -->
 <nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
   <section class="sidenav-content">
+    {{ $currentNode := . }}
+    <section class="nav-group collapsible">
+      <input id="Sections" type="checkbox">
+      <label for="Sections">Sections</label>
+      <ul class="nav-list">
+        {{ range .Site.Menus.clarityNavSidebar }}
+        <li><a class="nav-link {{if $currentNode.IsMenuCurrent "clarityNavSidebar" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">          {{ .Pre }}
+          {{ .Name }}
+</a></li>
+    {{ end }}
+    {{ if .Site.Params.clarityNavCategories }}
     <section class="nav-group collapsible">
       <input id="Categories" type="checkbox">
       <label for="Categories">Categories</label>
@@ -18,6 +20,8 @@
     {{ end }}
       </ul>
     </section>
+    {{ end }}
+    {{ if .Site.Params.clarityNavTags }}
     <section class="nav-group collapsible">
       <input id="Tags" type="checkbox">
       <label for="Tags">Tags (Top 10)</label>
@@ -32,5 +36,6 @@
           {{ end }}
       {{ end }}
     </section>
+    {{ end }}
   </section>
 </nav>
