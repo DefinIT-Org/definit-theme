@@ -1,14 +1,20 @@
 <nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
   <section class="sidenav-content">
     {{ $currentNode := . }}
+    {{ if .Site.Params.clarityNavSections }}
     <section class="nav-group collapsible">
       <input id="Sections" type="checkbox">
       <label for="Sections">Sections</label>
       <ul class="nav-list">
         {{ range .Site.Menus.clarityNavSidebar }}
-        <li><a class="nav-link {{if $currentNode.IsMenuCurrent "clarityNavSidebar" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">          {{ .Pre }}
-          {{ .Name }}
-</a></li>
+        <li>
+          <a class="nav-link {{if $currentNode.IsMenuCurrent "clarityNavSidebar" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">
+            {{ .Pre }}{{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
     {{ end }}
     {{ if .Site.Params.clarityNavCategories }}
     <section class="nav-group collapsible">
