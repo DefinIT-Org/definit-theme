@@ -50,7 +50,7 @@
         <div class="nav-group-content">
           <button type="button" class="nav-group-trigger" aria-expanded="false" aria-label="Toggle vertical navigation group" onClick="toggleNavigation('tags')">
             <div class="nav-group-text">
-                Tags (Top 10)
+                Tags (Top 10) 
             </div>
             <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-tags" dir="down" title="Collapse"></clr-icon>
           </button>
@@ -95,10 +95,10 @@
           <div class="nav-group-text">
               {{ safeHTML .Params.Pre }}{{ .Title }}{{ safeHTML .Params.Post }}
           </div>
-          <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-{{ .Title | urlize}}" dir="right" title="Collapse"></clr-icon>
+          <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-{{ .Title | urlize}}" dir="{{ if in $currentNode .Title }}down{{ else }}right{{ end }}" title="Collapse"></clr-icon>
         </button>
       </div>
-      <div id="section-{{ .Title | urlize}}" class="nav-group-children" style="display: none;">
+      <div id="section-{{ .Title | urlize}}" class="nav-group-children" {{ if in $currentNode .Title }}style="display: block;"{{ else }}style="display: none;"{{ end }}>
         <clr-vertical-nav-group-children>
           {{- .Scratch.Set "pages" .Pages -}}
           {{- if .Sections -}}
