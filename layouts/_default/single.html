@@ -4,13 +4,13 @@
       {{ partial "bloc/content/h1-title.html" . }}
       {{ partial "bloc/content/metas.html" . }}
       {{ partial "bloc/content/clarity-series-link.html" . }}
-      {{ partial "bloc/content/expire.html" . }}
+      {{ if .Site.Params.clarity.Expire }}{{ partial "bloc/content/expire.html" . }}{{end}}
       {{ partial "bloc/content/content.html" . }}
       {{ partial "bloc/content/sharing.html" . }}
       {{ partial "modules/disqus.html" . }}
       {{ partial "bloc/content/clarity-prev-next.html" . }}
   </div><!-- /.content-area -->
-  {{ if .Site.Params.clarityNavSidebar }}
+  {{ if .Site.Params.clarity.Nav.Sidebar }}
   {{ partial "bloc/content/clarity-navigation.html" . }}
   {{ end }}
 </div><!-- /.content-container -->

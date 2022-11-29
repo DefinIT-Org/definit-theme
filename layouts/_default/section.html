@@ -1,17 +1,20 @@
+{{ partial "html-head.html" . }}
 <div class="content-container">
     <div class="content-area">
-      <header>
+  {{- if .Content -}}
+  {{- .Content -}}
+  {{- else -}}
+      <h1>
        {{ partial "bloc/content/h1-title.html" . }}
-      </header>
+      </h1>
       {{ range $index, $foo := .Paginator.Pages  }}
       {{ .Render "section.li" }}
       {{ end }}
       {{ partial "bloc/content/pagination.html" . }}
-    </div><!-- /.content-area -->
-    {{ if .Site.Params.clarityNavSidebar }}
-    <nav class="sidenav">
-      {{ partial "bloc/content/clarity-navigation.html" . }}
-    </nav>
     {{ end }}
-  </div><!-- /.content-container -->
+    </div><!-- /.content-area -->
+    {{ if .Site.Params.clarity.Nav.Sidebar }}
+      {{ partial "bloc/content/clarity-navigation.html" . }}
+    {{ end }}
+</div><!-- /.content-container -->
 {{ partial "html-foot.html" . }}

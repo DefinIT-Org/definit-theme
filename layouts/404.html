@@ -5,7 +5,7 @@
           <p>What you're looking for isn't here, sorry!</p>
           <p><a href="{{ .Site.BaseURL }}">&larr; Click here to go back home</a></p>
           </div><!-- /.content-area -->
-      {{ if .Site.Params.clarityNavSidebar }}
+      {{ if .Site.Params.clarity.Nav.Sidebar }}
       {{ partial "bloc/content/clarity-navigation.html" . }}
       {{ end }}
     </div><!-- /.content-container -->

@@ -1,47 +1,92 @@
-<nav class="sidenav clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-6">
-  <section class="sidenav-content">
-    {{ $currentNode := . }}
-    {{ if .Site.Params.clarity.Nav.Sections }}
-    <section class="nav-group collapsible">
-      <input id="Sections" type="checkbox">
-      <label for="Sections">Sections</label>
-      <ul class="nav-list">
-        {{ range .Site.Menus.clarityNavSidebar }}
-        <li>
-          <a class="nav-link {{if $currentNode.IsMenuCurrent "clarityNavSidebar" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">
-            {{ .Pre }}{{ .Name }}
-          </a>
-        </li>
+{{ $homePage := ne .IsHome false}}
+<clr-vertical-nav class="clr-vertical-nav has-nav-groups">
+  <div class="nav-content">
+    <section class="sidenav-content">
+      {{ $currentNode := . }}
+      <a class="nav-link {{ if $homePage }} active{{ end }}" href="{{ .Site.BaseURL | relLangURL }}">
+        {{ safeHTML .Params.Pre }}Home{{ safeHTML .Params.Post }}
+      </a>
+      
+      {{ if .Site.Params.clarity.Nav.Sections }}
+        {{ range .Site.Home.Sections.ByWeight }}
+          {{template "menu-item" dict "sect" . "currentnode" $currentNode}}
         {{ end }}
-      </ul>
-    </section>
-    {{ end }}
-    {{ if .Site.Params.clarity.Nav.Categories }}
-    <section class="nav-group collapsible">
-      <input id="Categories" type="checkbox">
-      <label for="Categories">Categories</label>
-      <ul class="nav-list">
-    {{ range $key, $value := .Site.Taxonomies.categories }}
-        <li><a href="/category/{{ $key | urlize  }}" class="nav-link">{{ $key | upper }} <span class="badge badge-1">{{ .Count }}</span></a></li>
-    {{ end }}
-      </ul>
-    </section>
-    {{ end }}
-    {{ if .Site.Params.clarity.Nav.Tags }}
-    <section class="nav-group collapsible">
-      <input id="Tags" type="checkbox">
-      <label for="Tags">Tags (Top 10)</label>
-      <ul class="nav-list">
-      {{ $tags := $.Site.Taxonomies.tags.ByCount }}
-          {{ $v1 := where $tags "Count" ">=" 5 }}
-          {{ $v2 := where $v1 "Term" "not in" (slice "hugo" "tags" "rss") }}
-          {{ range first 10 $v2 }}
-          {{ if .Term }}
-          {{ $tagURL := printf "tag/%s" .Term | relURL }}
-          <li><a href="{{ $tagURL }}" class="nav-link">{{ .Term | upper }} <span class="badge badge-1">{{ .Count }}</span></a></li>
-          {{ end }}
       {{ end }}
     </section>
-    {{ end }}
-  </section>
-</nav>
+  </div>
+</clr-vertical-nav>
+
+{{define "menu-item"}}
+  {{- $currentNode := .currentnode -}}
+  {{ with .sect }}
+  {{ if .IsSection }}
+  {{ if in .Site.Params.menu_exclusion .Section }}
+    <!-- Ignore excluded sections -->
+  {{- else -}}
+    <!-- Section should be in menu -->
+    {{- $menuItemHasChildren := (add (len .Pages) (len .Sections)) -}}
+    {{ if ne $menuItemHasChildren 0 }}
+    <!-- If the section has children -->
+    <clr-vertical-nav-group class="nav-group">
+      <div class="nav-group-content">
+        <button type="button" class="nav-group-trigger" aria-expanded="false" aria-label="Toggle vertical navigation group" onClick="toggleNavigation('{{ .Title | urlize}}')">
+          <div class="nav-group-text">
+              {{ safeHTML .Params.Pre }}{{ .Title }}{{ safeHTML .Params.Post }}
+          </div>
+          <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-{{ .Title | urlize}}" dir="right" title="Collapse"></clr-icon>
+        </button>
+      </div>
+      <div id="section-{{ .Title | urlize}}" class="nav-group-children" style="display: none;">
+        <clr-vertical-nav-group-children>
+          {{- .Scratch.Set "pages" .Pages -}}
+          {{- if .Sections -}}
+            {{- .Scratch.Set "pages" (.Pages | union .Sections) -}}
+          {{- end -}}
+          {{- $pages := (.Scratch.Get "pages") -}}
+          {{- if eq .Site.Params.ordersectionsby "title" -}}
+            {{- range $pages.ByTitle -}}
+              {{- if and .Params.hidden (not $.showhidden) -}}
+              {{- else -}}
+                {{template "menu-item" dict "sect" . "currentnode" $currentNode}}
+              {{- end -}}
+            {{- end -}}
+          {{- else -}}
+            {{- range $pages.ByWeight -}}
+              {{- if and .Params.hidden (not $.showhidden) -}}
+              {{- else -}}
+                {{template "menu-item" dict "sect" . "currentnode" $currentNode}}
+              {{- end -}}
+            {{- end -}}
+          {{- end}}          
+        </clr-vertical-nav-group-children>
+      </div>
+    </clr-vertical-nav-group>
+    {{- else -}}
+        <a class="nav-link{{ if and .File $currentNode.File }}{{ if eq .File.UniqueID $currentNode.File.UniqueID }} active{{ end }}{{ end }}" href="{{ .Permalink }}">
+          <span class="nav-text">{{ safeHTML .Params.Pre }}{{ .Title }}{{ safeHTML .Params.Post }}</span>
+        </a>
+    {{end}}
+  {{- end -}}
+  {{- else -}}
+        <a class="nav-link {{ if and .File $currentNode.File }}{{ if eq .File.UniqueID $currentNode.File.UniqueID }}active{{ end }}{{ end }}" href="{{ .Permalink }}">
+          <span class="nav-text">{{ safeHTML .Params.Pre }}{{ .Title }}{{ safeHTML .Params.Post }}</span>
+        </a>
+  {{ end -}}
+  {{ end -}}
+{{end}}
+
+<script lang="javascript">
+  function toggleNavigation(objectId) {
+    var x = document.getElementById("section-"+objectId);
+    var y = document.getElementById("icon-"+objectId);
+    if (x.style.display === "none") {
+      // Menu is hidden, display it
+      x.style.display = "block";
+      y.dir = "down";
+    } else {
+      // Menu is visible, hide it
+      x.style.display = "none";
+      y.dir = "right";
+    }
+  }
+</script>

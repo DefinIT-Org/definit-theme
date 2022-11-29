@@ -12,7 +12,7 @@
     </div>
 </div>
 {{ end }}
-<header class="header-{{ .Site.Params.clarity.HeaderColour }}">
+<header class="header-{{ .Site.Params.clarity.Header.Colour }}">
     <!-- <button class="header-hamburger-trigger" type="button"><span></span></button> -->
     <div class="branding">
     {{ if and ( ne .Site.Title "" ) ( eq .Site.Params.BrandImage "" )}}
@@ -23,7 +23,7 @@
 
     {{ if ( ne .Site.Params.BrandImage "" ) }}
     <a class="navbar-brand-img" href="{{ .Site.BaseURL | relLangURL}}">
-      <img alt="{{ .Site.Params.brand }}" src="{{ .Site.Params.clarityHeaderImage }}">
+      <img alt="{{ .Site.Params.brand }}" src="{{ .Site.Params.clarity.Header.Image }}">
       <span class="title">{{ .Site.Title }}</span>
       {{ end }}
     </a>  

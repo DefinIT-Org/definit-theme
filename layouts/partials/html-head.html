@@ -9,6 +9,6 @@
   {{ partial "base/head-metas.html" . }}
   {{ partial "base/head-imports.html" . }}
 </head>
-<body{{ with .Site.Params.theme }} class="{{ . }}"{{ end }} data-ng-app="myapp" data-ng-controller="MyController" data-ng-mouseleave="MouseLeave($event)">
-  <div class="main-container">
+<body id="body"{{ with .Site.Params.theme }} class="{{ . }}"{{ end }} data-ng-app="myapp" data-ng-controller="MyController" data-ng-mouseleave="MouseLeave($event)">
+  <clr-main-container class="main-container">
     {{ partial "base/clarity-header.html" . }}
