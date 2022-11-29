@@ -1,4 +1,4 @@
-{{ if .Site.Params.claritySiteInfoText }}
+{{ if .Site.Params.clarity.Header.InfoText }}
 <div class="alert alert-app-level alert-info" role="alert">
     <div class="alert-items">
         <div class="alert-item static">
@@ -6,7 +6,7 @@
                 <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
             </div>
             <div class="alert-text">
-                {{ .Site.Params.claritySiteInfoText }}
+                {{ .Site.Params.clarity.Header.InfoText }}
             </div>
         </div>
     </div>
@@ -21,12 +21,12 @@
       <span class="title">{{ .Site.Title }}</span>
       {{ end }}
 
-    {{ if ( ne .Site.Params.BrandImage "" ) }}
+    {{ if ( ne .Site.Params.clarity.Header.Image "" ) }}
     <a class="navbar-brand-img" href="{{ .Site.BaseURL | relLangURL}}">
       <img alt="{{ .Site.Params.brand }}" src="{{ .Site.Params.clarity.Header.Image }}">
       <span class="title">{{ .Site.Title }}</span>
-      {{ end }}
     </a>  
+    {{ end }}
   </div>
   <nav class="header-nav">
     {{ $currentNode := . }}
