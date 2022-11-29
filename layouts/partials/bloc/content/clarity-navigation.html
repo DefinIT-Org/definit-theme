@@ -4,9 +4,12 @@
   <div class="nav-content">
     <section class="sidenav-content">
       {{ $currentNode := . }}
-      <a class="nav-link {{ if $homePage }} active{{ end }}" href="{{ .Site.BaseURL | relLangURL }}">
-        {{ safeHTML .Params.Pre }}Home{{ safeHTML .Params.Post }}
-      </a>
+
+      {{ range .Site.Menus.sidenav }}
+        <a class="nav-link{{ if $homePage }} active{{ end }}" href="{{ .URL | absLangURL }}">
+          {{ safeHTML .Params.Pre }}Home{{ safeHTML .Params.Post }}
+        </a>
+      {{ end }}
       
       {{ if .Site.Params.clarity.Nav.Sections }}
         {{ range .Site.Home.Sections.ByWeight }}
@@ -59,9 +62,9 @@
               {{ $v2 := where $v1 "Term" "not in" (slice "hugo" "tags" "rss") }}
               {{ range first 10 $v2 }}
               {{ if .Term }}
-                {{ $tagURL := printf "tag/%s" .Term | relURL }}
-                <a class="nav-link" href="{{ $tagURL }}">
-                  {{ .Term }} <span class="badge badge-1">{{ .Count }}</span>
+                {{ $tagLink := absURL (print "/tag/" (.Term | urlize) "/") }}
+                <a class="nav-link{{if eq $pageLink $tagLink}} active{{ end }}" href="{{ $tagLink }}">
+                  <span class="nav-text">{{ .Term }} <span class="badge badge-1">{{ .Count }}</span></span>
                 </a>
                 {{ end }}
             {{ end }}
