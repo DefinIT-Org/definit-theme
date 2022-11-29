@@ -17,7 +17,7 @@
 <header class="header-{{ .Site.Params.clarity.Header.Colour }}">
     <!-- <button class="header-hamburger-trigger" type="button"><span></span></button> -->
     <div class="branding">
-    {{ if and ( ne .Site.Title "" ) ( eq .Site.Params.BrandImage "" )}}
+    {{ if and ( ne .Site.Title "" ) ( eq .Site.Params.clarity.Header.Image "" )}}
     <a class="nav-link" href="{{ .Site.BaseURL | relLangURL}}">
       <clr-icon shape="vm-bug"></clr-icon>
       <span class="title">{{ .Site.Title }}</span>
@@ -26,7 +26,7 @@
     {{ if ( ne .Site.Params.clarity.Header.Image "" ) }}
     <a class="navbar-brand-img" href="{{ .Site.BaseURL | relLangURL}}">
       <img alt="{{ .Site.Params.brand }}" src="{{ .Site.Params.clarity.Header.Image }}">
-      <span class="title">{{ .Site.Title }}</span>
+      <span class="title">&nbsp;{{ .Site.Title }}</span>
     </a>  
     {{ end }}
   </div>
