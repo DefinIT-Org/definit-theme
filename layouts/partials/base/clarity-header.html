@@ -1,3 +1,5 @@
+{{ $pageLink := .Permalink }}
+
 {{ if .Site.Params.clarity.Header.InfoText }}
 <div class="alert alert-app-level alert-info" role="alert">
     <div class="alert-items">
@@ -31,7 +33,7 @@
   <nav class="header-nav">
     {{ $currentNode := . }}
     {{ range .Site.Menus.main }}
-        <a class="nav-link {{if $currentNode.IsMenuCurrent "main" . }}active{{end}} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">
+        <a class="nav-link{{ if eq (.URL | absLangURL) ( $pageLink) }} active{{ end }} nav-text" href="{{ .URL | absLangURL }}" title="{{ .Name }}">
           {{ .Pre }}
           {{ .Name }}
         </a>
