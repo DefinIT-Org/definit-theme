@@ -1,4 +1,5 @@
 {{ $homePage := ne .IsHome false}}
+{{ $pageLink := .Permalink }}
 <clr-vertical-nav class="clr-vertical-nav has-nav-groups">
   <div class="nav-content">
     <section class="sidenav-content">
@@ -11,7 +12,65 @@
         {{ range .Site.Home.Sections.ByWeight }}
           {{template "menu-item" dict "sect" . "currentnode" $currentNode}}
         {{ end }}
+        <div class="nav-divider"></div>
+
       {{ end }}
+
+
+      {{ if .Site.Params.clarity.Nav.Categories }}
+      <clr-vertical-nav-group class="nav-group">
+        <div class="nav-group-content">
+          <button type="button" class="nav-group-trigger" aria-expanded="false" aria-label="Toggle vertical navigation group" onClick="toggleNavigation('categories')">
+            <div class="nav-group-text">
+                Categories
+            </div>
+            <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-categories" dir="down" title="Collapse"></clr-icon>
+          </button>
+        </div>
+        <div id="section-categories" class="nav-group-children">
+          <clr-vertical-nav-group-children>
+            {{ range $key, $value := .Site.Taxonomies.categories }}
+              {{ $categoryLink := absURL (print "/category/" ($key | urlize) "/") }}
+              <a class="nav-link{{if eq $pageLink $categoryLink}} active{{ end }}" href="{{ $categoryLink }}">
+                <span class="nav-text">{{ $key }} <span class="badge badge-1">{{ .Count }}</span></span>
+              </a>
+            {{ end }}
+          </clr-vertical-nav-group-children>
+        </div>
+      </clr-vertical-nav-group>
+      <div class="nav-divider"></div>
+      {{ end }}
+
+
+      {{ if .Site.Params.clarity.Nav.Tags }}
+      <clr-vertical-nav-group class="nav-group">
+        <div class="nav-group-content">
+          <button type="button" class="nav-group-trigger" aria-expanded="false" aria-label="Toggle vertical navigation group" onClick="toggleNavigation('tags')">
+            <div class="nav-group-text">
+                Tags (Top 10)
+            </div>
+            <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-tags" dir="down" title="Collapse"></clr-icon>
+          </button>
+        </div>
+        <div id="section-tags" class="nav-group-children">
+          <clr-vertical-nav-group-children>
+            {{ $tags := $.Site.Taxonomies.tags.ByCount }}
+              {{ $v1 := where $tags "Count" ">=" 5 }}
+              {{ $v2 := where $v1 "Term" "not in" (slice "hugo" "tags" "rss") }}
+              {{ range first 10 $v2 }}
+              {{ if .Term }}
+                {{ $tagURL := printf "tag/%s" .Term | relURL }}
+                <a class="nav-link" href="{{ $tagURL }}">
+                  {{ .Term }} <span class="badge badge-1">{{ .Count }}</span>
+                </a>
+                {{ end }}
+            {{ end }}
+          </clr-vertical-nav-group-children>
+        </div>
+      </clr-vertical-nav-group>
+      <div class="nav-divider"></div>
+      {{ end }}
+
     </section>
   </div>
 </clr-vertical-nav>
