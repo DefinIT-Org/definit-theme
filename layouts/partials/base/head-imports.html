@@ -6,12 +6,13 @@
 
 <script src="/js/clr-icons.min.js"></script>
 <script src="/js/custom-elements.min.js"></script>
+<script src="/js/clr-toggle-darkmode.js"></script>
 
-{{ if .Site.Params.clarity.DarkTheme }}
-<link href="/css/clr-ui-dark.min.css" rel="stylesheet">
-{{ else }}
-<link href="/css/clr-ui.min.css" rel="stylesheet">
-{{ end }}
+
+<link id="dark-mode-css" {{ if not .Site.Params.clarity.DarkTheme }}disabled{{ end }} href="/css/clr-ui-dark.min.css" rel="stylesheet" type="text/css" as="style">
+<link id="light-mode-css" {{ if .Site.Params.clarity.DarkTheme }}disabled{{ end }} href="/css/clr-ui.min.css" rel="stylesheet" type="text/css" as="style">
+
 <link href="/css/clr-icons.min.css" rel="stylesheet">
 <link href="/css/definit-clarity.css" rel="stylesheet">
+<link href="/css/syntax-highlighting.css" rel="stylesheet">
 <link href="{{ "css/lightbox.min.css" | relURL }}" rel="stylesheet">

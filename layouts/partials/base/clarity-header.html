@@ -46,6 +46,16 @@
           <input type="hidden" name="as_sitesearch" value="{{ .Site.BaseURL }}">
       </label>
     </form>
+    <div class="clr-form-control">
+      <div class="clr-control-container">
+        <div class="clr-toggle-wrapper">
+          <input type="checkbox" id="toggle-clarity-theme-mode" name="toggle-basic" value="option1" class="clr-toggle" onclick="toggleThemeMode()" />
+          <label for="toggle-clarity-theme-mode">
+            <clr-icon shape="moon" id="icon-theme-mode" title="Toggle theme mode"></clr-icon>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
