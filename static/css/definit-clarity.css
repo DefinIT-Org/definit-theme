@@ -421,11 +421,25 @@ blockquote p {
 }
 
 
-p code {
+p code, li code {
     color: #a90d91;
 }
 
 .content-area h1 {
     margin-bottom: 1.7rem;
     margin-top: 1rem !important;
+}
+
+.clr-header-logo {
+    max-height: 36px;
+}
+
+.content-area ol {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.content-area ol li::marker {
+    font-weight: bold;
+    padding-right: 10px;
 }

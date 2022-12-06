@@ -24,8 +24,8 @@
       {{ end }}
 
     {{ if ( ne .Site.Params.clarity.Header.Image "" ) }}
-    <a class="navbar-brand-img" href="{{ .Site.BaseURL | relLangURL}}">
-      <img alt="{{ .Site.Params.brand }}" src="{{ .Site.Params.clarity.Header.Image }}">
+    <a class="logo-and-title" href="{{ .Site.BaseURL | relLangURL}}">
+      <img class="clr-header-logo" alt="{{ .Site.Params.brand }}" src="{{ .Site.Params.clarity.Header.Image }}">
       <span class="title">&nbsp;{{ .Site.Title }}</span>
     </a>  
     {{ end }}
