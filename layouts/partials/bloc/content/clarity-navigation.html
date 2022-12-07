@@ -98,7 +98,7 @@
           <clr-icon shape="angle" class="nav-group-trigger-icon" id="icon-{{ .Title | urlize}}" dir="{{ if in $currentNode .Title }}down{{ else }}right{{ end }}" title="Collapse"></clr-icon>
         </button>
       </div>
-      <div id="section-{{ .Title | urlize}}" class="nav-group-children" {{ if in $currentNode .Title }}style="display: block;"{{ else }}style="display: none;"{{ end }}>
+      <div id="section-{{ .Title | urlize}}" class="nav-group-children" {{ if in ($currentNode | lower) ( .Title | lower) }}style="display: block;"{{ else }}style="display: none;"{{ end }}>
         <clr-vertical-nav-group-children>
           {{- .Scratch.Set "pages" .Pages -}}
           {{- if .Sections -}}
