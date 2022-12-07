@@ -10,7 +10,9 @@
             <div class="alert-icon-wrapper">
                 <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
             </div>
-            <span class="alert-text">{{(.Get "text" | markdownify)}}{{ .Inner }}</span>
+            <span class="alert-text">
+                {{(.Get "text" | markdownify)}}{{ .Inner | markdownify}}
+            </span>
         </div>
     </div>
 </div>

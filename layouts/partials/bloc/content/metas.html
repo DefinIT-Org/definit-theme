@@ -1,3 +1,4 @@
+{{ if not .Params.hidePageMetas }}
 <div class="metas">
   {{ if .IsPage }}
   <span class="clr-card-authors">
@@ -35,3 +36,4 @@
   {{ end }}
 </div>
 <br clear=all />
+{{ end }}
