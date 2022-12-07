@@ -10,11 +10,11 @@
 
 <br clear="none">
 <div class="clr-content-image-wrap">
-    {{ if .Get "caption"}}<figure>{{ end }}
+    {{ if $caption }}<figure>{{ end }}
         <a href="{{ .Get "src" }}" data-lightbox="{{ .Get "src" }}" data-title="{{ $alt }}" class="lb">
             <img class="lb" src="{{ .Get "src" }}" alt="{{ $alt }}" {{ with .Get "width"}} width="{{.}}" {{ end }} />
         </a>
-    {{ if .Get "caption" }}
+    {{ if $caption }}
         <figcaption class="clr-caption">{{ $caption }}</figcaption>
     </figure>
     {{ end }}
