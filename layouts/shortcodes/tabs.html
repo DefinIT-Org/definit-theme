@@ -2,15 +2,33 @@
 {{ $id := .Get 0 }}
 {{ $group := printf "tabs-%s" $id }}
 
-<div class="gdoc-tabs">
+<ul id="{{ $group }}" class="nav" role="tablist">
   {{ range $index, $tab :=  .Scratch.Get $group }}
-    <input type="radio" class="gdoc-tabs__control hidden" name="{{ $group }}" id="{{ printf "%s-%d" $group $index }}"
-      {{ if not $index }}checked="checked" {{ end }} />
-    <label for="{{ printf "%s-%d" $group $index }}" class="gdoc-tabs__label">
-      {{ $tab.Name }}
-    </label>
-    <div class="gdoc-markdown--nested gdoc-tabs__content">
-      {{ .Content | $.Page.RenderString }}
-    </div>
+  {{ $panel := (printf "%s%d" "panel" $index) }}
+  <li role="presentation" class="nav-item">
+      <button id="{{ printf "%s-%d" $group $index }}" class="tabLinks btn btn-link nav-link {{ if not $index }}active{{ end }}" aria-controls="{{ $panel }}" {{ if not $index }}aria-selected="true"{{else}}aria-selected="false"{{ end }} onclick="openTab(event, '{{ $panel }}');" type="button">{{ $tab.Name }}</button>
+  </li>
   {{ end }}
-</div>
+</ul>
+{{ range $index, $tab :=  .Scratch.Get $group }}
+{{ $panel := (printf "%s%d" "panel" $index) }}
+<section id="{{ $panel }}" class="tabContent" {{ if $index }}aria-hidden="true"{{ end }}>
+  {{ .Content | $.Page.RenderString }}
+</section>
+{{ end }}
+
+<script>
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabContent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tabLinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
