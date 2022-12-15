@@ -1,0 +1,34 @@
+{{ if .Inner }}{{ end }}
+{{ $id := .Get 0 }}
+{{ $group := printf "cards-%s" $id }}
+
+
+<div class="clr-row">
+    {{ range $index, $card :=  .Scratch.Get $group }}
+    <div class="clr-col-12 clr-col-sm-12 clr-col-md-12 clr-col-lg-6 clr-col-xl-4">
+        <div class="card">
+            <div class="card-header">
+                {{ if $card.Image }}
+                <img src="{{ $card.Image }}" class="clr-card-header-image">
+                {{ else if $card.Icon }}
+                <clr-icon shape="{{ $card.Icon }}"></clr-icon>
+                {{ end }}
+                {{ $card.Name }}
+            </div>
+            <div class="card-block">
+                <div class="card-text">
+                        {{ .Content | markdownify }}
+                </div>
+            </div>
+            {{ if $card.Link }}
+            <div class="card-footer">
+                <a href="{{ $card.Link }}"{{ if strings.HasPrefix $card.Link "http" }} target="_blank"{{ end }} class="card-link">
+                    {{ if strings.HasPrefix $card.Link "http" }} <clr-icon shape="pop-out"></clr-icon> {{ end }}Open
+                </a>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</div>
+

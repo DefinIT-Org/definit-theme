@@ -1,0 +1,15 @@
+{{ if .Parent }}
+{{ $name := .Get "Name" }}
+{{ $link := .Get "Link" }}
+{{ $image := .Get "Image" }}
+{{ $icon := .Get "Icon" }}
+{{ $group := printf "cards-%s" (.Parent.Get 0) }}
+
+  {{ if not (.Parent.Scratch.Get $group) }}
+    {{ .Parent.Scratch.Set $group slice }}
+  {{ end }}
+
+  {{ .Parent.Scratch.Add $group (dict "Name" $name "Content" .Inner "Link" $link "Image" $image "Icon" $icon ) }}
+{{ else }}
+  {{ errorf "%q: 'card' shortcode must be inside 'cards' shortcode" .Page.Path }}
+{{ end}}
