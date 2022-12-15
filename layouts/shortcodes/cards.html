@@ -11,7 +11,7 @@
                 {{ if $card.Image }}
                 <img src="{{ $card.Image }}" class="clr-card-header-image">
                 {{ else if $card.Icon }}
-                <clr-icon shape="{{ $card.Icon }}"></clr-icon>
+                <clr-icon shape="{{ $card.Icon }}" size="36"></clr-icon>
                 {{ end }}
                 {{ $card.Name }}
             </div>
@@ -23,7 +23,7 @@
             {{ if $card.Link }}
             <div class="card-footer">
                 <a href="{{ $card.Link }}"{{ if strings.HasPrefix $card.Link "http" }} target="_blank"{{ end }} class="card-link">
-                    {{ if strings.HasPrefix $card.Link "http" }} <clr-icon shape="pop-out"></clr-icon> {{ end }}Open
+                    {{ if strings.HasPrefix $card.Link "http" }} <clr-icon shape="pop-out" size="14"></clr-icon> {{ end }}Open
                 </a>
             </div>
             {{ end }}
