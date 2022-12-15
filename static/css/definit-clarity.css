@@ -453,7 +453,5 @@ p code, li code {
 }
 
 div.card-text {
-    max-height: 200px;
-    min-height: 200px;
     overflow: hidden;
 }
