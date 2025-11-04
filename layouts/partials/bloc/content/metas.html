@@ -4,6 +4,11 @@
   <span class="clr-card-authors">
       <div class="clr-card-authors">
         {{ if isset .Params "authors"}}
+          {{- range .Params.authors }}
+              {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}<img src="{{ .Params.photo }}" alt="" class="img-author" />Written by <a href="{{ .Permalink }}" class="">{{ .Params.name }}</a>{{ end }}
+          {{ end }}
+        {{ end }}
+        <!-- {{ if isset .Params "authors"}}
           Written by
           {{- range .Params.authors }}
               {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}
@@ -13,18 +18,21 @@
           {{ $links := apply .Params.authors "partial" "bloc/content/clarity-card-category-link" "." }}
           {{ $clean := apply $links "chomp" "." }}
           {{ delimit $clean ", " " and "}}
-        {{ end }}
+        {{ end }} -->
       </div>
       <div class="clr-card-authors">
         Published on {{ .Date.Format .Site.Data.Formats.date }} -
         {{ i18n "readinabout" . }} ({{ i18n "words" . }})
       </div>
       <div class="clr-card-authors">
+        Published under
         {{ if isset .Params "categories"}}
-          Published under {{ $links := apply .Params.categories "partial" "bloc/content/clarity-card-category-link" "." }}
-          {{ $clean := apply $links "chomp" "." }}
-          {{ delimit $clean ", " " and "}}
+            {{- range $index, $element := .Params.categories -}}
+                {{- if $index }}, {{ end -}}
+                <a href="/category/{{ $element | urlize }}">{{ $element }}</a>
+            {{- end -}}
         {{ end }}
+
 
         {{ if isset .Params "tags"}}
           {{ range .Params.tags }}

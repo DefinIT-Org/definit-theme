@@ -14,7 +14,16 @@
                         on {{ .Date.Format .Site.Data.Formats.date }}
                         </div>
                         <div class="clr-card-authors">
-                        Published under {{ if isset .Params "categories"}}{{ $links := apply .Params.categories "partial" "bloc/content/clarity-card-category-link" "." }}{{ $clean := apply $links "chomp" "." }}{{ delimit $clean ", " " and "}}{{ end }}
+                        Published under
+                        {{ if isset .Params "categories"}}
+                            {{- range $index, $element := .Params.categories -}}
+                                {{- if $index }}, {{ end -}}
+                                <a href="/category/{{ $element | urlize }}">{{ $element }}</a>
+                            {{- end -}}
+                            <!-- {{ $links := apply .Params.categories "partial" "bloc/content/clarity-card-category-link" "." }}
+                            {{ $clean := apply $links "chomp" "." }}
+                            {{ delimit $clean ", " " and "}} -->
+                        {{ end }}
                         </div>
                     </span>
                 </div>
